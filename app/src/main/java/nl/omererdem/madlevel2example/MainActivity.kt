@@ -2,6 +2,9 @@ package nl.omererdem.madlevel2example
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import nl.omererdem.madlevel2example.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -18,6 +21,25 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        
+        binding.btnAddReminder.setOnClickListener {
+            val reminder = binding.etReminder.text.toString()
+            addReminder(reminder)
+        }
+
+        binding.rvReminders.layoutManager = LinearLayoutManager(
+            this@MainActivity,
+            RecyclerView.VERTICAL,
+            false
+        )
+        binding.rvReminders.adapter = reminderAdapter
+
+        binding.rvReminders.addItemDecoration(DividerItemDecoration(
+            this@MainActivity,
+            DividerItemDecoration.VERTICAL
+        ))
+    }
+
+    private fun addReminder(reminder: String) {
+
     }
 }
