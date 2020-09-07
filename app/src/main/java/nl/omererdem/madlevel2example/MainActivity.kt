@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import nl.omererdem.madlevel2example.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -40,6 +41,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun addReminder(reminder: String) {
-
+        if (reminder.isNotBlank()) {
+            reminders.add(Reminder(reminder))
+            reminderAdapter.notifyDataSetChanged()
+            binding.etReminder.text?.clear()
+        } else {
+            Snackbar.make(
+                binding.etReminder,
+                "You must fill in the input field!",
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
     }
 }
